@@ -43,3 +43,4 @@ const Footer = ({ activeCount, completedCount, onClearCompleted }) => {
   }
 }
 export default Footer
+
