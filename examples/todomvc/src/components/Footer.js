@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
 import FilterLink from '../containers/FilterLink'
 import { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } from '../constants/TodoFilters'
@@ -9,8 +9,7 @@ const FILTER_TITLES = {
   [SHOW_COMPLETED]: 'Completed'
 }
 
-const Footer = (props) => {
-  const { activeCount, completedCount, onClearCompleted } = props
+const Footer = ({ activeCount, completedCount, onClearCompleted }) => {
   const itemWord = activeCount === 1 ? 'item' : 'items'
   return (
     <footer className="footer">
@@ -32,16 +31,15 @@ const Footer = (props) => {
           className="clear-completed"
           onClick={onClearCompleted}
         >Clear completed</button>
-        
+
       }
     </footer>
   )
-}
 
-Footer.propTypes = {
-  completedCount: PropTypes.number.isRequired,
-  activeCount: PropTypes.number.isRequired,
-  onClearCompleted: PropTypes.func.isRequired,
+  Footer.propTypes = {
+    completedCount: PropTypes.number.isRequired,
+    activeCount: PropTypes.number.isRequired,
+    onClearCompleted: PropTypes.func.isRequired,
+  }
 }
-
 export default Footer
