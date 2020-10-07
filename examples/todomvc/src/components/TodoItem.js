@@ -5,21 +5,21 @@ import TodoTextInput from './TodoTextInput'
 
 const TodoItem = ({ deleteTodo, editTodo, todo, completeTodo }) => {
   const [editing, setEditing] = useState(false);
-  const handleCompleted = useMemo(classnames({ completed: todo.completed }), [todo.completed])
+  const handleCompleted = useMemo(() => classnames({ completed: todo.completed }), [todo.completed])
   const handleDeleteTodo = useCallback(id => deleteTodo(id), [deleteTodo])
   const handleEditTodo = useCallback((id, text) => editTodo(id, text), [editTodo])
-  const handleEditTodo = useCallback(() => deleteTodo(todo.id), [deleteTodo, todo.id])
+  const handlerDeleteTodo = useCallback(() => deleteTodo(todo.id), [deleteTodo, todo.id])
   const handleCompleteTodo = useCallback(() => completeTodo(todo.id), [completeTodo, todo.id])
-  const handleOnSave = useCallback(text => handleSave(todo.id, text), [handleSave, todo.id, text])
+  const handleOnSave = useCallback(text => handleSave(todo.id, text), [handleSave, todo.id])
 
   const handleDoubleClick = useCallback(() =>
     setEditing(true), [setEditing]);
 
   const handleSave = useCallback((id, text) => {
     if (text.length === 0) {
-      handleDeleteTodo
+      handleDeleteTodo(id)
     } else {
-      handleEditTodo
+      handleEditTodo(id, text)
     }
     setEditing(false);
   }, [handleDeleteTodo, handleEditTodo]);
@@ -42,7 +42,7 @@ const TodoItem = ({ deleteTodo, editTodo, todo, completeTodo }) => {
           {todo.text}
         </label>
         <button className="destroy"
-          onClick={handleEditTodo} />
+          onClick={handlerDeleteTodo} />
       </div>
     )
 
