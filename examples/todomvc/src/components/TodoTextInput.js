@@ -4,7 +4,7 @@ import classnames from 'classnames'
 
 const TodoTextInput = ({ onSave, newTodo, editing, placeholder }) => {
   const [text, setText] = useState('');
-  const className = useMemo(classnames({ edit: editing, 'new-todo': newTodo }), [editing, newTodo]);
+  const className = useMemo(() => classnames({ edit: editing, 'new-todo': newTodo }), [editing, newTodo]);
 
   const handleSubmit = useCallback(e => {
     const text = e.target.value.trim()
